@@ -22,11 +22,7 @@ feature 'pictures' do
 
   context 'adding a new picture' do
     scenario 'shows user a form to add new picture, then displays it' do
-      visit pictures_path
-      sign_up
-      click_link 'Add a picture'
-      attach_file('picture[image]', 'lib/images/default.jpg')
-      click_button 'Upload picture'
+      sign_up_and_add_a_picture
       expect(page).to have_css("img[src*='default.jpg']")
       expect(page).not_to have_content 'Your instagram is empty'
     end
@@ -40,22 +36,14 @@ feature 'pictures' do
 
   context 'deleting pictures' do
     scenario 'user can delete his own picture' do
-      visit pictures_path
-      sign_up
-      click_link 'Add a picture'
-      attach_file('picture[image]', 'lib/images/default.jpg')
-      click_button 'Upload picture'
+      sign_up_and_add_a_picture
       click_link 'Delete'
       expect(page).not_to have_css("img[src*='default.jpg']")
       expect(page).to have_content 'Your instagram is empty'
     end
 
     scenario 'user can not delete someone else picture' do
-      visit pictures_path
-      sign_up
-      click_link 'Add a picture'
-      attach_file('picture[image]', 'lib/images/default.jpg')
-      click_button 'Upload picture'
+      sign_up_and_add_a_picture
       sign_up_with_another_user
       click_link 'Delete'
       save_and_open_page

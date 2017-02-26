@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def new
-    @picture = Restaurant.find(params[:picture_id])
+    @picture = Picture.find(params[:picture_id])
     @comment = Comment.new
     redirect_to pictures_path
   end

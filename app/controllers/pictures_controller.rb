@@ -4,7 +4,12 @@ class PicturesController < ApplicationController
   end
 
   def new
-    @picture = Picture.new
+    if current_user
+      @picture = Picture.new
+    else
+      flash[:notice] = 'Your have to sign up to be able to post pictures'
+      redirect_to pictures_path
+    end
   end
 
   def create

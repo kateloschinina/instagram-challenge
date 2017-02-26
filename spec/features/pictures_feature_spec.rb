@@ -9,6 +9,7 @@ feature 'pictures' do
     end
   end
 
+
   context 'picture has been added' do
     before { Picture.create }
 

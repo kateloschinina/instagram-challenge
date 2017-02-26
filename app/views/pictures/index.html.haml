@@ -1,7 +1,14 @@
 - if @pictures.any?
   - @pictures.each do |picture|
     = image_tag picture.image.url(:medium)
+    %br
     = link_to 'Delete', picture_path(picture), method: :delete
+    = form_for [picture, picture.comments.new] do |f|
+      = f.text_field :thoughts
+      = f.submit 'Add a comment'
+    - if picture.comments.any?
+      - picture.comments.each do |comment|
+        %p= comment.thoughts
     %br
 - else
   Your instagram is empty

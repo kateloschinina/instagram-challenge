@@ -50,7 +50,7 @@ feature 'pictures' do
       expect(page).to have_content 'Your instagram is empty'
     end
 
-    scenario 'user can not delete someones else picture' do
+    scenario 'user can not delete someone else picture' do
       visit pictures_path
       sign_up
       click_link 'Add a picture'
@@ -60,7 +60,7 @@ feature 'pictures' do
       click_link 'Delete'
       save_and_open_page
       expect(page).to have_css("img[src*='default.jpg']")
-      expect(page).to have_content 'You can not delete someones elses pictures'
+      expect(page).to have_content 'You can not delete someone elses pictures'
     end
   end
 end

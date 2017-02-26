@@ -31,7 +31,7 @@ class PicturesController < ApplicationController
       flash[:notice] = 'Your picture was successfully deleted'
       redirect_to pictures_path
     else
-      flash[:notice] = 'You can not delete someones elses pictures'
+      flash[:notice] = 'You can not delete someone elses pictures'
       redirect_to pictures_path
     end
   end

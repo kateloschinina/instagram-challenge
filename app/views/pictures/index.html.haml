@@ -1,20 +1,21 @@
 - if @pictures.any?
   - @pictures.each do |picture|
-    = image_tag picture.image.url(:medium)
-    %br
-    = link_to 'Delete', picture_path(picture), method: :delete
-    = form_for [picture, Like.new] do |f|
-      = f.submit 'Like'
-    = form_for [picture, picture.comments.new] do |f|
-      = f.text_field :thoughts
-      = f.submit 'Add a comment'
-    - if picture.comments.any?
-      - picture.comments.each do |comment|
-        %p= comment.thoughts
-    - if picture.likes.any?
-      %p= pluralize picture.likes.length, 'like'
-    %br
+    %div.picture-box
+      = image_tag picture.image.url(:medium)
+      %br
+      = link_to 'Delete', picture_path(picture), method: :delete
+      = form_for [picture, Like.new] do |f|
+        = f.submit 'Like'
+      = form_for [picture, picture.comments.new] do |f|
+        = f.text_field :thoughts
+        = f.submit 'Add a comment'
+      - if picture.comments.any?
+        - picture.comments.each do |comment|
+          %p= comment.thoughts
+      - if picture.likes.any?
+        %p= pluralize picture.likes.length, 'like'
+      %br
 - else
   Your instagram is empty
 %br
-%a(href=new_picture_path) Add a picture
+%a.btn.btn-default.add-btn(href=new_picture_path) Add a picture

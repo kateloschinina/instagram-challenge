@@ -13,3 +13,46 @@
  *= require_tree .
  *= require_self
  */
+
+.navbar-header {
+  width: 90vw;
+}
+
+.container {
+  min-height: 20vh;
+}
+
+.logo-group {
+  display: inline;
+}
+
+.logo {
+  max-height: 70px;
+}
+
+.logo-text {
+  text-transform: uppercase;
+  color: white;
+  font-family: cursive;
+}
+
+.row {
+  width: 100vw;
+  position: absolute;
+  top: 20vh;
+}
+
+.picture-box {
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid lightgrey;
+}
+
+.picture {
+  margin: 10px auto;
+  min-width: 600px;
+}
+
+.add-btn {
+  margin: 0 auto;
+}

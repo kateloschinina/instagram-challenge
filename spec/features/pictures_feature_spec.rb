@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'pictures' do
   context 'no pictures have been added' do
     scenario 'should display a prompt to add a picture' do
-      visit '/pictures'
+      visit pictures_path
       expect(page).to have_content 'Your instagram is empty.'
       expect(page).to have_link 'Add a picture'
     end
@@ -13,7 +13,7 @@ feature 'pictures' do
     before { Picture.create }
 
     scenario 'display pictures' do
-      visit '/pictures'
+      visit pictures_path
       expect(page).to have_css("img[src*='lib/images/default.jpg']")
       expect(page).not_to have_content 'Your instagram is empty.'
     end
@@ -21,7 +21,7 @@ feature 'pictures' do
 
   context 'adding a new picture' do
     scenario 'shows user a form to add new picture, then displays it' do
-      visit '/pictures'
+      visit pictures_path
       click_link 'Add a picture'
       attach_file('picture[image]', 'lib/images/default.jpg')
       click_button 'Upload picture'
@@ -32,7 +32,7 @@ feature 'pictures' do
 
   context 'deleting pictures' do
     scenario 'user can delete his own picture' do
-      visit '/pictures'
+      visit pictures_path
       click_link 'Add a picture'
       attach_file('picture[image]', 'lib/images/default.jpg')
       click_button 'Upload picture'

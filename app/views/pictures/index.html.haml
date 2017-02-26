@@ -1,0 +1,7 @@
+- if @pictures.any?
+  - @pictures.each do |picture|
+    = image_tag picture.image.url(:thumb)
+- else
+  Your instagram is empty.
+
+%a(href='#') Add a picture

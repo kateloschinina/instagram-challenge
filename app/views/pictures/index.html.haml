@@ -1,6 +1,7 @@
 - if @pictures.any?
   - @pictures.each do |picture|
     = image_tag picture.image.url(:medium)
+    = link_to 'Delete', picture_path(picture), method: :delete
     %br
 - else
   Your instagram is empty.

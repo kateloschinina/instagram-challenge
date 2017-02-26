@@ -10,9 +10,10 @@ feature 'pictures' do
   end
 
   context 'picture has been added' do
-    before { Picture.create }
-
     scenario 'display pictures' do
+      sign_up
+      @user = User.find_by_email('test@example.com')
+      @user.pictures.create!
       visit pictures_path
       expect(page).to have_css("img[src*='lib/images/default.jpg']")
       expect(page).not_to have_content 'Your instagram is empty'
@@ -49,8 +50,17 @@ feature 'pictures' do
       expect(page).to have_content 'Your instagram is empty'
     end
 
-    # scenario 'user can not delete someones else picture' do
-    #
-    # end
+    scenario 'user can not delete someones else picture' do
+      visit pictures_path
+      sign_up
+      click_link 'Add a picture'
+      attach_file('picture[image]', 'lib/images/default.jpg')
+      click_button 'Upload picture'
+      sign_up_with_another_user
+      click_link 'Delete'
+      save_and_open_page
+      expect(page).to have_css("img[src*='default.jpg']")
+      expect(page).to have_content 'You can not delete someones elses pictures'
+    end
   end
 end

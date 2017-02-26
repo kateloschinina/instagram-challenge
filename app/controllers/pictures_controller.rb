@@ -4,8 +4,9 @@ class PicturesController < ApplicationController
   end
 
   def new
-    if current_user
-      @picture = Picture.new
+    @user = current_user
+    if @user
+      @picture = @user.pictures.new(user_id: @user.id)
     else
       flash[:notice] = 'Your have to sign up to be able to post pictures'
       redirect_to pictures_path
@@ -13,8 +14,9 @@ class PicturesController < ApplicationController
   end
 
   def create
+    @user = current_user
     if params[:picture]
-      Picture.create!(picture_params)
+      @user.pictures.create!(picture_params)
       redirect_to pictures_path
     else
       flash[:notice] = 'You have not uploaded anything yet'
@@ -24,9 +26,14 @@ class PicturesController < ApplicationController
 
   def destroy
     @picture = Picture.find(params[:id])
-    @picture.destroy
-    flash[:notice] = 'Your picture was successfully deleted'
-    redirect_to pictures_path
+    if @picture.user_id == current_user.id
+      @picture.destroy
+      flash[:notice] = 'Your picture was successfully deleted'
+      redirect_to pictures_path
+    else
+      flash[:notice] = 'You can not delete someones elses pictures'
+      redirect_to pictures_path
+    end
   end
 
   private

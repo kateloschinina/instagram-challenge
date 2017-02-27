@@ -33,7 +33,7 @@
 .logo-text {
   text-transform: uppercase;
   color: white;
-  font-family: cursive;
+  /*font-family: cursive;*/
 }
 
 .row {
@@ -43,16 +43,30 @@
 }
 
 .picture-box {
-  max-width: 800px;
+  max-width: 640px;
   margin: 20px auto;
   border: 1px solid lightgrey;
 }
 
 .picture {
-  margin: 10px auto;
-  min-width: 600px;
+  margin: 20px 20px 20px 20px;
+  min-width: 800px;
 }
 
 .add-btn {
   margin: 0 auto;
+  width: 120px;
+}
+
+.reactions {
+  width: 600px;
+  margin: 20px 20px 20px 20px;
+}
+
+.like {
+  width: 70px;
+}
+
+.forms {
+  display: inline;
 }

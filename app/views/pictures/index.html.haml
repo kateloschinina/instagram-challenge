@@ -1,21 +1,30 @@
+%a.btn.btn-default.center-block.add-btn(href=new_picture_path) Add a picture
+%br
 - if @pictures.any?
   - @pictures.each do |picture|
-    %div.picture-box
-      = image_tag picture.image.url(:medium)
+    %div.picture-box.center-block
+      %div.picture
+        = image_tag picture.image.url(:medium)
       %br
-      = link_to 'Delete', picture_path(picture), method: :delete
-      = form_for [picture, Like.new] do |f|
-        = f.submit 'Like'
-      = form_for [picture, picture.comments.new] do |f|
-        = f.text_field :thoughts
-        = f.submit 'Add a comment'
-      - if picture.comments.any?
-        - picture.comments.each do |comment|
-          %p= comment.thoughts
-      - if picture.likes.any?
-        %p= pluralize picture.likes.length, 'like'
+      %div.reactions
+        - if picture.likes.any?
+          %p= pluralize picture.likes.length, 'like'
+        - if picture.comments.any?
+          - picture.comments.each do |comment|
+            %p= comment.thoughts
+        %td
+          %span>
+            = form_for [picture, Like.new] do |f|
+              = f.submit 'Like', class: 'btn btn-default like'
+          %span>
+            = link_to 'Delete', picture_path(picture), method: :delete, class: 'btn btn-default like'
+          %span>
+            = form_for [picture, picture.comments.new] do |f|
+              = f.text_field :thoughts, class: 'btn btn-default'
+              = f.submit 'Add a comment', class: 'btn btn-default'
+
       %br
 - else
   Your instagram is empty
 %br
-%a.btn.btn-default.add-btn(href=new_picture_path) Add a picture
+%a.btn.btn-default.center-block.add-btn(href=new_picture_path) Add a picture
